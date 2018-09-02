@@ -16,16 +16,21 @@ public class DBConnection {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         //create Connection
         connection = DriverManager.getConnection(url, user, password);
-        //create Statement Object
-        statement = connection.createStatement();
-        //execute query (запрос)
-        resultSet = statement.executeQuery("SELECT * FROM branch");
-        System.out.println("BRANCH_ID || ADDRESS || CITY || STATE || ZIP_CODE");
-        while (resultSet.next())
-            System.out.println(resultSet.getString(1) + " || " + resultSet.getString(2) + " || " + resultSet.getString(3)
-                    + " || " + resultSet.getString(4) + " || " + resultSet.getString(5));
-        //close Connection Object
-        connection.close();
 
+
+        //create Statement Object
+        //statement = connection.createStatement();
+        //execute query (запрос)
+        //resultSet = statement.executeQuery("SELECT * FROM branch");
+
+
+    }
+
+    public void closeConnection() throws SQLException {
+        connection.close();
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }

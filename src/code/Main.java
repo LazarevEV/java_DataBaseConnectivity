@@ -15,6 +15,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
         DBConnection dbConnection = new DBConnection();
+        DBTableWorker dbtw = new DBTableWorker("branch");
+
         String user = null;
         String password = null;
 
@@ -25,8 +27,9 @@ public class Main extends Application {
         user = "C##dbu";
         password = "SQLdev0112";
         //------------//
-
-        dbConnection.setConnection(user, password);
+        dbtw.DBTW_init(user, password);
+        dbtw.tableDrop();
+        //dbConnection.setConnection(user, password);
     }
     private String getUsPass(int code) { // code == 0 - User || code == 1 - Password
         Scanner scanner = new Scanner(System.in);
