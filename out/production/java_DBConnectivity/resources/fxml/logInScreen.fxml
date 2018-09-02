@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.sceneControllers.LogInScreenController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="400.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="154.0" layoutY="100.0" prefHeight="300.0" prefWidth="400.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="292.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="92.6708984375">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="userTF" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="292.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="92.6708984375">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="passTF" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#logIn" prefHeight="31.0" prefWidth="130.0" text="Log In" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
