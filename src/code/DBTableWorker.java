@@ -1,5 +1,6 @@
 package code;
 
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +18,20 @@ public class DBTableWorker {
 
     public void DBTW_init() throws SQLException {
         statement = dbConnection.getConnection().createStatement();
+    }
+
+    public void showTableList() throws SQLException {
+        resultSet = statement.executeQuery("SELECT table_name FROM user_tables");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(1));
+        }
+    }
+    public void showTableListI() throws SQLException { //DOESNT WORK
+       DatabaseMetaData dmd = dbConnection.getConnection().getMetaData();
+       resultSet = dmd.getTables(null, null, null, null);
+       while (resultSet.next()) {
+           System.out.println(resultSet.getString(3));
+       }
     }
 
     public void tableCreate() {

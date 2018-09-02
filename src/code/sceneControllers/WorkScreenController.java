@@ -31,11 +31,7 @@ public class WorkScreenController implements Initializable {
     }
 
     public void showTableList() throws SQLException {
-        System.out.println("Username: " + username + "  || Password: " + password);
-        System.out.println("WSC_dbConnection: " + dbConnection);
-        System.out.println("DBTW: " + dbtw);
-        dbtw.setTableName("branch");
-        dbtw.showAll();
+        dbtw.showTableList();
     }
 
     public String getUsername() {
