@@ -40,7 +40,7 @@
                         <TextField fx:id="passTF" />
                      </children>
                   </HBox>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#logIn" prefHeight="31.0" prefWidth="130.0" text="Log In" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#logIn" prefHeight="31.0" prefWidth="130.0" text="Log In" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />

@@ -1,7 +1,10 @@
 package code.sceneControllers;
 
+import code.DBConnection;
+import code.DBTableWorker;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,8 +16,11 @@ import org.w3c.dom.events.Event;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class LogInScreenController {
+public class LogInScreenController implements Initializable {
 
     @FXML
     private TextField userTF;
@@ -25,8 +31,22 @@ public class LogInScreenController {
     @FXML
     private TextField passTF;
 
-    public void logIn() {
+    private String username;
+    private String password;
+
+    private DBConnection dbConnection = new DBConnection();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    public void logIn() throws SQLException, ClassNotFoundException, IOException {
+        setUsername(userTF.getText());
+        setPassword(passTF.getText());
+
         if (check()) {
+            dbConnection.setConnection(username, password);
             System.out.println("CORRECT");
             openWorkScreen();
             ((Stage) loginButton.getScene().getWindow()).close();
@@ -42,18 +62,42 @@ public class LogInScreenController {
         else return false;
     }
 
-    private void openWorkScreen() {
-        Parent root = null;
-        try {
-            root = new FXMLLoader(this.getClass().getResource("/resources/fxml/WorkScreen.fxml")).load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Stage gameStage = new Stage();
-        gameStage.setTitle("Game Screen");
-        gameStage.setScene(new Scene(root));
-        gameStage.setResizable(false);
-        gameStage.show();
+    private void openWorkScreen() throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/resources/fxml/WorkScreen.fxml"));
+        loader.load();
+
+        WorkScreenController wsc = loader.getController();
+        wsc.setUsername(username);
+        wsc.setPassword(password);
+        wsc.setDbConnection(dbConnection);
+        wsc.setDbtw(new DBTableWorker(dbConnection));
+
+        Parent root = loader.getRoot();
+        Stage wscStage = new Stage();
+        wscStage.setTitle("Working Screen");
+        wscStage.setScene(new Scene(root));
+        wscStage.setResizable(false);
+        wscStage.show();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public DBConnection getDbConnection() {
+        return dbConnection;
+    }
 }
