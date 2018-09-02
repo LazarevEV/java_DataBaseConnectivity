@@ -3,6 +3,7 @@ package code;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main extends Application {
@@ -12,7 +13,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws ClassNotFoundException {
+    public void start(Stage primaryStage) throws ClassNotFoundException, SQLException {
         DBConnection dbConnection = new DBConnection();
         String user = null;
         String password = null;
