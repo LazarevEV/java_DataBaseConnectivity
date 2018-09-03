@@ -45,8 +45,9 @@ public class LogInScreenController implements Initializable {
     public void logIn() throws SQLException, ClassNotFoundException, IOException {
         setUsername(userTF.getText());
         setPassword(passTF.getText());
+        LogInCheck logInCheck = new LogInCheck();
 
-        if (check()) {
+        if (logInCheck.check(username, password)) {
             dbConnection.setConnection(username, password);
             System.out.println("CORRECT");
             openWorkScreen();
@@ -56,11 +57,6 @@ public class LogInScreenController implements Initializable {
             userTF.setText(null);
             passTF.setText(null);
         }
-    }
-
-    private boolean check() {
-        if (userTF.getText().equals("C##dbu") && passTF.getText().equals("SQLdev0112")) return true;
-        else return false;
     }
 
     private void openWorkScreen() throws IOException, SQLException {
