@@ -1,5 +1,9 @@
 package code;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -55,37 +59,32 @@ public class DBTableWorker {
     }
 
     public Table showAll(String tableName) throws SQLException {
-
         resultSet = statement.executeQuery("SELECT * FROM " + tableName);
         rsmd = resultSet.getMetaData();
 
         int colomns = rsmd.getColumnCount();
         ArrayList<String> colomnNames = new ArrayList<>();
-        ArrayList<String> data = new ArrayList<>();
 
         for (int i = 1; i <= colomns; i++) colomnNames.add(rsmd.getColumnName(i));
 
-        while (resultSet.next()) {
-            for (int i = 1; i <= colomns; i++) {
-                data.add(resultSet.getString(i));
-            }
-        }
-        //TEST DATA ARRAYLIST
-//        System.out.println("\nDATA:");
-////        int i = 1;
-////        for (String str : data) {
-////            if (i != colomns) {
-////                System.out.print(str + " || ");
-////                i++;
-////            } else {
-////                System.out.println(str);
-////                i = 1;
-////            }
-////        }
 
 //        resultSet.close();
 //        statement.close();
-        return new Table(tableName, colomns, colomnNames, data);
+        return new Table(tableName, colomns, colomnNames, getData(resultSet));
+    }
+
+    public ObservableList<ObservableList> getData(ResultSet resultSet) throws SQLException {
+        ObservableList<ObservableList> data = FXCollections.observableArrayList();
+
+        while (resultSet.next()) {
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for(int i=1 ; i<=resultSet.getMetaData().getColumnCount(); i++){
+                row.add(resultSet.getString(i));
+            }
+            data.add(row);
+        }
+
+        return data;
     }
 
     public void setTableName(String tableName) {

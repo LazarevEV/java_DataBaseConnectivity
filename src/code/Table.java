@@ -1,14 +1,16 @@
 package code;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Table {
     private String tableName;
     private int colomns;
     private ArrayList<String> colomnNames;
-    private ArrayList<String> data;
+    private ObservableList<ObservableList> data;
 
-    public Table(String tableName, int colomns, ArrayList<String> colomnNames, ArrayList<String> data) {
+    public Table(String tableName, int colomns, ArrayList<String> colomnNames, ObservableList<ObservableList> data) {
         this.tableName = tableName;
         this.colomns = colomns;
         this.colomnNames = colomnNames;
@@ -23,7 +25,7 @@ public class Table {
         this.tableName = tableName;
     }
 
-    public int getColomns() {
+    public int getColumns() {
         return colomns;
     }
 
@@ -39,11 +41,11 @@ public class Table {
         this.colomnNames = colomnNames;
     }
 
-    public ArrayList<String> getData() {
+    public ObservableList<ObservableList> getData() {
         return data;
     }
 
-    public void setData(ArrayList<String> data) {
+    public void setData(ObservableList<ObservableList> data) {
         this.data = data;
     }
 }
