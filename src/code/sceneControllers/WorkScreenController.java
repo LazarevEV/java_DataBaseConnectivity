@@ -2,20 +2,16 @@ package code.sceneControllers;
 
 import code.DBConnection;
 import code.DBTableWorker;
+import code.Table;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXScrollPane;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.TextAlignment;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,12 +28,16 @@ public class WorkScreenController implements Initializable {
     @FXML
     private VBox tableList;
 
+    @FXML
+    private TableView<?> tableView;
+
     DBConnection dbConnection;
     DBTableWorker dbtw;
 
     private String username;
     private String password;
     private ArrayList<String> tableArrList = new ArrayList<String>();
+    private Table table;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,15 +51,11 @@ public class WorkScreenController implements Initializable {
             button.setPrefSize(tableList.getWidth(), Region.USE_COMPUTED_SIZE);
             button.setText(talTemp);
             button.setButtonType(JFXButton.ButtonType.FLAT);
-//            button.setStyle("-fx-text-alignment: CENTER");
-//            button.setStyle("-fx-text-fill: #e4e4e4");
-//            button.setStyle("-fx-background-color: #6A7F97");
-//            button.setStyle("-fx-background-radius: 0");
             button.getStylesheets().add("/resources/css/WorkScreen.css");
             button.getStyleClass().add("tableButton");
             button.setOnAction(event ->  {
                 try {
-                    dbtw.showAll(talTemp);
+                    showTable(talTemp);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -78,6 +74,16 @@ public class WorkScreenController implements Initializable {
         }
     }
 
+    private void showTable(String tableName) throws SQLException {
+        table = dbtw.showAll(tableName);
+        tableView.getColumns().clear();
+        ArrayList<TableColumn> tabColAL = new ArrayList<>();
+        for (String str : table.getColomnNames()) {
+            TableColumn tabCol = new TableColumn(str);
+            tableView.getColumns().add(tabCol);
+        }
+
+    }
     public String getUsername() {
         return username;
     }

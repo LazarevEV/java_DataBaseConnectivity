@@ -1,7 +1,6 @@
 .scroll-pane {
     -fx-color-label-visible: #4f5f6f;
     -fx-background-color: #4f5f6f;
-    -fx-hbar-policy: NEVER;
     -fx-arrows-visible: false;
 }
 .scroll-pane > .viewport {
@@ -11,6 +10,13 @@
     -fx-background-color:  #6A7F97;
 }
 .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 0 2 0 2;
+}
+.scroll-bar:horizontal > .thumb {
+    -fx-background-color:  #6A7F97;
+}
+.scroll-bar:horizontal {
     -fx-background-color: transparent;
     -fx-padding: 0 2 0 2;
 }

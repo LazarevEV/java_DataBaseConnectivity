@@ -54,31 +54,38 @@ public class DBTableWorker {
 
     }
 
-    public void showAll(String tableName) throws SQLException {
-        System.out.println("\nTableName: " + tableName);
+    public Table showAll(String tableName) throws SQLException {
 
         resultSet = statement.executeQuery("SELECT * FROM " + tableName);
         rsmd = resultSet.getMetaData();
 
         int colomns = rsmd.getColumnCount();
         ArrayList<String> colomnNames = new ArrayList<>();
+        ArrayList<String> data = new ArrayList<>();
 
         for (int i = 1; i <= colomns; i++) colomnNames.add(rsmd.getColumnName(i));
 
-        //Colomn Names Output
-        for (int i = 0; i < colomnNames.size(); i++) {
-            if (colomnNames.get(i) != colomnNames.get(colomnNames.size() - 1)) System.out.print(colomnNames.get(i) + " || ");
-            else System.out.println(colomnNames.get(i));
-        }
-        System.out.println("---------------------------------------------------------------------");
         while (resultSet.next()) {
             for (int i = 1; i <= colomns; i++) {
-                if (i!=colomns) System.out.print(resultSet.getString(i) + " || ");
-                else System.out.println(resultSet.getString(i));
+                data.add(resultSet.getString(i));
             }
         }
+        //TEST DATA ARRAYLIST
+//        System.out.println("\nDATA:");
+////        int i = 1;
+////        for (String str : data) {
+////            if (i != colomns) {
+////                System.out.print(str + " || ");
+////                i++;
+////            } else {
+////                System.out.println(str);
+////                i = 1;
+////            }
+////        }
+
 //        resultSet.close();
 //        statement.close();
+        return new Table(tableName, colomns, colomnNames, data);
     }
 
     public void setTableName(String tableName) {

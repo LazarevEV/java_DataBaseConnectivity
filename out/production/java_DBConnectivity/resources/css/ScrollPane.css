@@ -12,6 +12,7 @@
 }
 .scroll-bar:vertical {
     -fx-background-color: transparent;
+    -fx-padding: 0 2 0 2;
 }
 .scroll-bar > .increment-button, .scroll-bar > .decrement-button, .scroll-bar:hover > .increment-button, .scroll-bar:hover > .decrement-button {
     -fx-background-color:transparent;

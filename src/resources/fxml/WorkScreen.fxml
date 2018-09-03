@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.sceneControllers.WorkScreenController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.sceneControllers.WorkScreenController">
    <left>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -31,15 +31,14 @@
          </BorderPane.margin></VBox>
    </left>
    <right>
-      <TableView prefHeight="500.0" prefWidth="462.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <ScrollPane prefViewportHeight="600.0" prefViewportWidth="863.0" stylesheets="@../css/TableScrollPane.css">
+         <content>
+            <TableView fx:id="tableView" prefHeight="600.0" prefWidth="863.0" stylesheets="@../css/TableView.css" BorderPane.alignment="CENTER" />
+         </content>
+      </ScrollPane>
    </right>
    <center>
-      <ScrollPane fx:id="scrollPaneOne" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/ScrollPane.css" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scrollPaneOne" prefHeight="600.0" prefWidth="210.0" stylesheets="@../css/ScrollPane.css" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="tableList" prefHeight="498.0" prefWidth="183.0" spacing="4.0">
                <padding>
