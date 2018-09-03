@@ -2,6 +2,7 @@ package code.sceneControllers;
 
 import code.DBConnection;
 import code.DBTableWorker;
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +27,7 @@ public class LogInScreenController implements Initializable {
     private TextField userTF;
 
     @FXML
-    private Button loginButton;
+    private JFXButton loginButton;
 
     @FXML
     private TextField passTF;

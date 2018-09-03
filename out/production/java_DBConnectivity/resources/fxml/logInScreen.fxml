@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.sceneControllers.LogInScreenController">
+<GridPane style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.sceneControllers.LogInScreenController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -22,7 +23,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="292.0" spacing="10.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="92.6708984375">
+                        <Text fill="#e4e4e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="92.6708984375">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -32,7 +33,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="292.0" spacing="10.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="92.6708984375">
+                        <Text fill="#e4e4e4" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="92.6708984375">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -40,7 +41,11 @@
                         <TextField fx:id="passTF" />
                      </children>
                   </HBox>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#logIn" prefHeight="31.0" prefWidth="130.0" text="Log In" />
+                  <JFXButton fx:id="loginButton" onAction="#logIn" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #6A7F97;" text="LOG IN" textFill="#e4e4e4">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </JFXButton>
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />

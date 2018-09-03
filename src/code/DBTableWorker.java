@@ -1,14 +1,13 @@
 package code;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class DBTableWorker {
     DBConnection dbConnection;
     Statement statement;
     ResultSet resultSet;
+    ResultSetMetaData rsmd;
     private String tableName = null;
 
     public DBTableWorker(DBConnection dbConnection) throws SQLException {
@@ -20,18 +19,22 @@ public class DBTableWorker {
         statement = dbConnection.getConnection().createStatement();
     }
 
-    public void showTableList() throws SQLException {
+    public ArrayList<String> getTableList() throws SQLException {
+        ArrayList<String> tableList = new ArrayList<String>();
         resultSet = statement.executeQuery("SELECT table_name FROM user_tables");
+        int i = 0;
         while (resultSet.next()) {
-            System.out.println(resultSet.getString(1));
+            tableList.add(resultSet.getString(1));
         }
+        return tableList;
     }
+
     public void showTableListI() throws SQLException { //DOESNT WORK
-       DatabaseMetaData dmd = dbConnection.getConnection().getMetaData();
-       resultSet = dmd.getTables(null, null, null, null);
-       while (resultSet.next()) {
-           System.out.println(resultSet.getString(3));
-       }
+        DatabaseMetaData dmd = dbConnection.getConnection().getMetaData();
+        resultSet = dmd.getTables(null, null, null, null);
+        while (resultSet.next()) {
+            System.out.println(resultSet.getString(3));
+        }
     }
 
     public void tableCreate() {
@@ -51,17 +54,31 @@ public class DBTableWorker {
 
     }
 
-    public void showAll() throws SQLException {
-        System.out.println("TableName: " + tableName);
+    public void showAll(String tableName) throws SQLException {
+        System.out.println("\nTableName: " + tableName);
 
         resultSet = statement.executeQuery("SELECT * FROM " + tableName);
-        System.out.println("BRANCH_ID || ADDRESS || CITY || NAME || STATE || ZIP_CODE");
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString(1) + " || " + resultSet.getString(2) + " || " + resultSet.getString(3) + " || " +
-                    resultSet.getString(4) + " || " + resultSet.getString(5) + " || ");
+        rsmd = resultSet.getMetaData();
+
+        int colomns = rsmd.getColumnCount();
+        ArrayList<String> colomnNames = new ArrayList<>();
+
+        for (int i = 1; i <= colomns; i++) colomnNames.add(rsmd.getColumnName(i));
+
+        //Colomn Names Output
+        for (int i = 0; i < colomnNames.size(); i++) {
+            if (colomnNames.get(i) != colomnNames.get(colomnNames.size() - 1)) System.out.print(colomnNames.get(i) + " || ");
+            else System.out.println(colomnNames.get(i));
         }
-        resultSet.close();
-        statement.close();
+        System.out.println("---------------------------------------------------------------------");
+        while (resultSet.next()) {
+            for (int i = 1; i <= colomns; i++) {
+                if (i!=colomns) System.out.print(resultSet.getString(i) + " || ");
+                else System.out.println(resultSet.getString(i));
+            }
+        }
+//        resultSet.close();
+//        statement.close();
     }
 
     public void setTableName(String tableName) {
