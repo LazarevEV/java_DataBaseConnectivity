@@ -3,10 +3,12 @@ package code.sceneControllers;
 import code.DBConnection;
 import code.DBTableWorker;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXScrollPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -49,10 +51,12 @@ public class WorkScreenController implements Initializable {
             button.setPrefSize(tableList.getWidth(), Region.USE_COMPUTED_SIZE);
             button.setText(talTemp);
             button.setButtonType(JFXButton.ButtonType.FLAT);
-            button.setStyle("-fx-text-alignment: CENTER");
-            button.setStyle("-fx-text-fill: #e4e4e4");
-            button.setStyle("-fx-background-color: #6A7F97");
-            button.setStyle("-fx-background-radius: 0");
+//            button.setStyle("-fx-text-alignment: CENTER");
+//            button.setStyle("-fx-text-fill: #e4e4e4");
+//            button.setStyle("-fx-background-color: #6A7F97");
+//            button.setStyle("-fx-background-radius: 0");
+            button.getStylesheets().add("/resources/css/WorkScreen.css");
+            button.getStyleClass().add("tableButton");
             button.setOnAction(event ->  {
                 try {
                     dbtw.showAll(talTemp);
@@ -60,6 +64,16 @@ public class WorkScreenController implements Initializable {
                     e.printStackTrace();
                 }
             });
+            tableList.getChildren().add(button);
+        }
+
+        for (int i = 0; i<10; i++) {
+            JFXButton button = new JFXButton();
+            button.setPrefSize(tableList.getWidth(), Region.USE_COMPUTED_SIZE);
+            button.setText("Button "+i);
+            button.setButtonType(JFXButton.ButtonType.FLAT);
+            button.getStylesheets().add("/resources/css/WorkScreen.css");
+            button.getStyleClass().add("tableButton");
             tableList.getChildren().add(button);
         }
     }
