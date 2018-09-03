@@ -79,7 +79,8 @@ public class DBTableWorker {
         while (resultSet.next()) {
             ObservableList<String> row = FXCollections.observableArrayList();
             for(int i=1 ; i<=resultSet.getMetaData().getColumnCount(); i++){
-                row.add(resultSet.getString(i));
+                if (resultSet.getString(i) == null) row.add("NULL");
+                else row.add(resultSet.getString(i));
             }
             data.add(row);
         }
